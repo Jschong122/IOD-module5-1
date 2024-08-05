@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <title>Calculator Example</title>
+  </head>
+  <body>
+    <div>
+      <input type="number" id="num1" /> +
+      <input type="number" id="num2" />
+      <button id="addbtn" onclick="addNumbers()">+ number</button>
+      <br />
+      <input type="number" id="num3" /> -
+      <input type="number" id="num4" />
+      <button id="minusbtn" onclick="minusNumbers()">- number</button>
+      <br />
+      <input type="number" id="num5" /> *
+      <input type="number" id="num6" />
+      <button id="multiplybtn" onclick="multiplyNumbers()">* number</button>
+      <br />
+      <input type="number" id="num7" /> /
+      <input type="number" id="num8" />
+      <button id="dividebtn" onclick="divideNumbers()">/ number</button>
+      <br />
+    </div>
+
+    Result
+    <span id="result"></span>
+  </body>
+  <script>
+    function addNumbers() {
+      num1 = document.getElementById("num1").value;
+      num2 = document.getElementById("num2").value;
+      fetch(`/calculator/add?num1=${num1}&num2=${num2}`)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("result").innerHTML = data.result;
+        });
+    }
+
+    function minusNumbers() {
+      num3 = document.getElementById("num3").value;
+      num4 = document.getElementById("num4").value;
+
+      fetch(`/calculator/minus?num1=${num3}&num2=${num4}`)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("result").innerHTML = data.result;
+        });
+    }
+
+    function multiplyNumbers() {
+      num5 = document.getElementById("num5").value;
+      num6 = document.getElementById("num6").value;
+
+      fetch(`calculator/multiply?num1=${num5}&num2=${num6}`)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("result").innerHTML = data.result;
+        });
+
+      function divideNumbers() {
+        num7 = document.getElementById("num7").value;
+        num8 = document.getElementById("num8").value;
+
+        fetch(`calculator/divide?num1=${num7}&num2=${num8}`)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("result").innerHTML = data.result;
+          });
+      }
+    }
+  </script>
+</html>
